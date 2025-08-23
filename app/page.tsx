@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+/*
 export default function Home() {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
@@ -100,4 +100,35 @@ export default function Home() {
       </footer>
     </div>
   );
+}
+
+
+*/
+
+import { Header } from "@/components/landing/header"
+import { Hero } from "@/components/landing/hero"
+import { HowItWorks } from "@/components/landing/how-it-works"
+import { Testimonials } from "@/components/landing/testimonials"
+import { Partners } from "@/components/landing/partners"
+import { Footer } from "@/components/landing/footer"
+
+export default function HomePage() {
+  return (
+    <div className="min-h-screen">
+      <Header />
+      <main>
+        <Hero />
+        <div id="features">
+          <HowItWorks />
+        </div>
+        <div id="testimonials">
+          <Testimonials />
+        </div>
+        <div id="partners">
+          <Partners />
+        </div>
+      </main>
+      <Footer />
+    </div>
+  )
 }

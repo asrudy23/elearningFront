@@ -2,12 +2,18 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Work_Sans } from "next/font/google"
 import "./globals.css"
+
+// --- VOS IMPORTS EXISTANTS ---
 import { Toaster } from "@/components/ui/toaster"
 
-const inter = Work_Sans({
+// --- IMPORTS REQUIS AJOUTÉS ---
+import QueryProvider from './providers/QueryProvider'
+import { AuthProvider } from './context/AuthContext'
+
+const workSans = Work_Sans({ // J'ai renommé la variable pour éviter la confusion avec le type "inter"
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-inter", // Vous l'avez nommée --font-inter, c'est ok si c'est voulu
 })
 
 export const metadata: Metadata = {
@@ -23,10 +29,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className={`${inter.variable} antialiased`}>
+    <html lang="fr" className={`${workSans.variable} antialiased`}>
       <body className="font-sans">
-        {children}
-        <Toaster />
+        {/*
+          Les providers doivent envelopper le contenu de l'application ({children})
+          pour que leurs fonctionnalités (cache de données, état d'authentification)
+          soient disponibles sur toutes les pages.
+        */}
+        <QueryProvider>
+          <AuthProvider>
+            {children}
+            <Toaster />
+          </AuthProvider>
+        </QueryProvider>
       </body>
     </html>
   )

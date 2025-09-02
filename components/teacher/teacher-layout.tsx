@@ -140,6 +140,7 @@ import { LayoutDashboard, BookOpen, Plus, BarChart3, User, LogOut, Menu, X } fro
 
 // --- EXPLICATION 1: Importer notre hook de déconnexion centralisé ---
 import { useLogoutMutation } from "@/lib/query/mutations/auth.mutation"
+import { AuthGuard } from "../auth/authGuard"
 
 const navigation = [
   { name: "Tableau de bord", href: "/teacher/dashboard", icon: LayoutDashboard },
@@ -161,6 +162,7 @@ export function TeacherLayout({ children }: TeacherLayoutProps) {
   const { mutate: logout, isPending } = useLogoutMutation()
 
   return (
+    <AuthGuard>
     <div className="min-h-screen bg-[#F8F9FA]">
       {/* Mobile sidebar (Le style et la structure restent identiques) */}
       <div className={cn("fixed inset-0 z-50 lg:hidden", sidebarOpen ? "block" : "hidden")}>
@@ -232,5 +234,6 @@ export function TeacherLayout({ children }: TeacherLayoutProps) {
         <main className="p-6 lg:p-8">{children}</main>
       </div>
     </div>
+    </AuthGuard>
   )
 }

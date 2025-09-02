@@ -153,6 +153,7 @@ import { LayoutDashboard, Users, BookOpen, Settings, LogOut, Menu, X, Shield, Us
 
 // --- EXPLICATION 1: Importer notre hook de déconnexion ---
 import { useLogoutMutation } from "@/lib/query/mutations/auth.mutation"
+import { AuthGuard } from "../auth/authGuard"
 
 const navigation = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
@@ -174,6 +175,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const { mutate: logout, isPending } = useLogoutMutation()
 
   return (
+    <AuthGuard>
     <div className="min-h-screen bg-[#F8F9FA]">
       {/* Mobile sidebar (Le style et la structure restent identiques) */}
       <div className={cn("fixed inset-0 z-50 lg:hidden", sidebarOpen ? "block" : "hidden")}>
@@ -257,5 +259,6 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         <main className="p-6 lg:p-8">{children}</main>
       </div>
     </div>
+    </AuthGuard>
   )
 }

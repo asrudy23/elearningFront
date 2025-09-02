@@ -44,15 +44,19 @@ export const useLogoutMutation = () => {
   return useMutation({
     mutationFn: logoutUser,
     onSuccess: () => {
+  
       logoutFromContext();
-      queryClient.clear(); // Vide le cache pour ne pas garder de données obsolètes
+
+    
+      queryClient.resetQueries({ queryKey: ['currentUser'] });
+
       router.push('/login');
     },
     onError: (error) => {
       console.error("Erreur lors de la déconnexion:", error);
-      // Force la déconnexion côté client même si l'appel API échoue
+      
       logoutFromContext();
-      queryClient.clear();
+      queryClient.resetQueries({ queryKey: ['currentUser'] });
       router.push('/login');
     },
   });

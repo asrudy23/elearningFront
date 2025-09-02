@@ -1,0 +1,1 @@
+export type Category = "PROGRAMMATION" | "DESIGN" | "MARKETING" | "FINANCE" | "CREATIF" | "MANAGEMENT" | "LANGUES";

@@ -11,3 +11,13 @@ export interface User {
   role: Role;          // Utilise notre type Role  
   isActive: boolean;   // Nouveau champ
 }
+
+// Elle correspond à votre DTO UserRequest côté backend.
+export interface CreateUserPayload {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  password: string;
+  role: Role; // Utilise notre enum 'STUDENT' | 'TEACHER'
+}
